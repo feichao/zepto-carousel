@@ -32,6 +32,7 @@
 >$(".wan-carousel").WanCarousel();
 
 **options**
+
 If you want goto some pages when user click the image, you can wrap the image with `<a href="link"></a>`. 
 
 >interval: millisecond.
