@@ -10,26 +10,49 @@
 </head>
 
 <body>
-  <div class="carousel-container carousel-container-1" style="width: 50%">
+  <div class="wan-carousel wan-carousel-1" style="width: 50%; float:left;">
     <div class="carousel-list">
-      <a href="http://www.baidu.com">
+      <img src="img/1.jpg" alt="img">
+      <img src="img/2.jpg" alt="img">
+      <img src="img/3.jpg" alt="img">
+      <img src="img/4.jpg" alt="img">
+    </div>
+  </div>
+  <div class="wan-carousel wan-carousel-2" style="width: 50%; float:left;">
+    <div class="carousel-list">
+      <a href="#">
         <img src="img/1.jpg" alt="img">
       </a>
-      <a href="http://0xfc.cn">
-        <img src="img/2.jpg" alt="img">
+      <img src="img/2.jpg" alt="img">
+    </div>
+  </div>
+  <div class="wan-carousel wan-carousel-3" style="width: 50%; float:left;">
+    <div class="carousel-list">
+      <img src="img/2.jpg" alt="img">
+      <img src="img/3.jpg" alt="img">
+      <img src="img/4.jpg" alt="img">
+    </div>
+  </div>
+  <div class="wan-carousel wan-carousel-4" style="width: 50%; float:left;">
+    <div class="carousel-list">
+      <a href="#">
+        <img src="img/1.jpg" alt="img">
       </a>
-      <a href="http://abcdone.cn">
-        <img src="img/3.jpg" alt="img">
-      </a>
-      <a href="http://abcdone.cn">
-        <img src="img/4.jpg" alt="img">
-      </a>
+      <img src="img/2.jpg" alt="img">
     </div>
   </div>
   <script type="text/javascript" src="js/jquery-1.11.3.js"></script>
   <script type="text/javascript" src="../build/wan-carousel.js"></script>
   <script>
-    $(".carousel-container-1").WanCarousel();
+  $(".wan-carousel-1, .wan-carousel-2").WanCarousel();
+  $(".wan-carousel-3").WanCarousel({
+    interval: 8000,
+    speed: 400,
+  });
+  $(".wan-carousel-4").WanCarousel({
+    interval: 2000,
+    speed: 800,
+  });
   </script>
 </body>
 
