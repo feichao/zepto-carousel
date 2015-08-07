@@ -1,0 +1,51 @@
+/*********** spinner start *************/
+
+.carousel-container {
+  overflow: hidden;
+  position: relative;
+  width: 100%;
+}
+
+.carousel-container .carousel-content {
+  width: 300%;
+}
+
+.carousel-container .carousel-content img {
+  float: left;
+  height: 100%;
+  position: relative;
+  width: 33.33333%;
+  right: 33.33333%;
+}
+
+.hidden {
+  display: none;
+}
+
+.carousel-container .carousel-direction .carousel-direction-left,
+.carousel-container .carousel-direction .carousel-direction-right {
+  background-image: url(img/transparent-50-black.png);
+  border-radius: 3px;
+  cursor: pointer;
+  fill: white;
+  margin-top: -40px;
+  opacity: 0.9;
+  position: absolute;
+  text-decoration: none;
+  top: 50%;
+}
+
+.carousel-container .carousel-direction .carousel-direction-left {
+  left: 10px;
+}
+
+.carousel-container .carousel-direction .carousel-direction-right {
+  right: 10px;
+}
+
+.carousel-container .carousel-list {
+  display: none;
+}
+
+
+/*********** spinner end *************/
