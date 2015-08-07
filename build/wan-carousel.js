@@ -2,6 +2,12 @@
 (function($, window, document, undefined) {
   'use strict';
 
+  var hasSVG = (function() {
+    var SVG_NS = 'http://www.w3.org/2000/svg';
+    return !!document.createElementNS &&
+      !!document.createElementNS(SVG_NS, 'svg').createSVGRect;
+  })();
+
   var WanCarousel = function(element, options) {
     this.defaults = {
       interval: 6000,
@@ -36,21 +42,34 @@
         '</div>'
       ].join('');
 
-      var direction = ['<div class="carousel-direction">',
-        '<a href="javascript:void(0)" class="carousel-direction-left">',
-        '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="48" height="48">',
-        '<path d="M15.41 16.09l-4.58-4.59 4.58-4.59L14 5.5l-6 6 6 6z"></path>',
-        '</svg>',
-        '</a>',
-        '<a href="javascript:void(0)" class="carousel-direction-right">',
-        '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="48" height="48">',
-        '<path d="M8.59 16.34l4.58-4.59-4.58-4.59L10 5.75l6 6-6 6z"></path>',
-        '</svg>',
-        '</a>',
-        '</div>'
-      ].join('');
+      var direction;
+      if (hasSVG) {
+        direction = ['<div class="carousel-direction hidden">',
+          '<a href="javascript:void(0)" class="carousel-direction-left">',
+          '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="48" height="48">',
+          '<path d="M15.41 16.09l-4.58-4.59 4.58-4.59L14 5.5l-6 6 6 6z"></path>',
+          '</svg>',
+          '</a>',
+          '<a href="javascript:void(0)" class="carousel-direction-right">',
+          '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="48" height="48">',
+          '<path d="M8.59 16.34l4.58-4.59-4.58-4.59L10 5.75l6 6-6 6z"></path>',
+          '</svg>',
+          '</a>',
+          '</div>'
+        ].join('');
+      } else {
+        direction = ['<div class="carousel-direction hidden">',
+          '<a href="javascript:void(0)" class="carousel-direction-left">',
+          '<span>&lt;</span>',
+          '</a>',
+          '<a href="javascript:void(0)" class="carousel-direction-right">',
+          '<span>&gt;</span>',
+          '</a>',
+          '</div>'
+        ].join('');
+      }
 
-      this.element.append(content);
+        this.element.append(content);
       this.element.append(direction);
       return true;
     }
@@ -67,7 +86,7 @@
     self.imgContentRight = self.element.find('.carousel-content .item-right');
     self.direction = self.element.find('.carousel-direction');
 
-    self.element.delegate('.carousel-content', 'mouseenter', function() {
+    self.element.delegate('.carousel-content', 'mouseover', function() {
       self.direction.removeClass('hidden');
     }).delegate(self.element.selector, 'mouseleave', function() {
       self.direction.addClass('hidden');

@@ -1,6 +1,6 @@
 /*********** carousel start *************/
 
-.wan-carousel{
+.wan-carousel {
   overflow: hidden;
   position: relative;
   width: 100%;
@@ -33,6 +33,15 @@
   position: absolute;
   text-decoration: none;
   top: 50%;
+}
+
+.wan-carousel .carousel-direction span {
+  color: white;
+  font-size: 50px;
+  font-family: monospace;
+  font-weight: bold;
+  margin: 0;
+  padding: 5px 10px;
 }
 
 .wan-carousel .carousel-direction .carousel-direction-left {
