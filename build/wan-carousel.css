@@ -28,7 +28,8 @@
   border-radius: 3px;
   cursor: pointer;
   fill: white;
-  margin-top: -40px;
+  height: 48px;
+  margin-top: -24px;
   opacity: 0.9;
   position: absolute;
   text-decoration: none;
