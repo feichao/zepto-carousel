@@ -1,6 +1,6 @@
 ## wan-carousel,  a jQuery Carousel
 
-**demo**
+### [demo](http://0xfc.cn/2015/08/11/carousel/) ###
 
 >demo/test.html
 
@@ -38,6 +38,3 @@ If you want goto some pages when user click the image, you can wrap the image wi
 >interval: millisecond.
 >
 >speed: millisecond.
-
-
-
