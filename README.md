@@ -1,6 +1,6 @@
 ## wan-carousel,  a jQuery Carousel
 
-### [demo](http://0xfc.cn/2015/08/11/carousel/) ###
+### [demo](http://blog.0xfc.cn/2015/08/11/carousel/) ###
 
 >demo/test.html
 
