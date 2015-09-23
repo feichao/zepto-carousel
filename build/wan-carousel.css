@@ -24,33 +24,42 @@
 
 .wan-carousel .carousel-direction .carousel-direction-left,
 .wan-carousel .carousel-direction .carousel-direction-right {
-  background-image: url(img/transparent-50-black.png);
-  border-radius: 3px;
   cursor: pointer;
-  fill: white;
-  height: 48px;
-  margin-top: -24px;
-  opacity: 0.9;
+  height: 150px;
+  margin-top: -75px;
   position: absolute;
   text-decoration: none;
+  text-indent: -10000px;
   top: 50%;
-}
-
-.wan-carousel .carousel-direction span {
-  color: white;
-  font-size: 50px;
-  font-family: monospace;
-  font-weight: bold;
-  margin: 0;
-  padding: 5px 10px;
+  width: 70px;
 }
 
 .wan-carousel .carousel-direction .carousel-direction-left {
+  background-image: url(img/banner-img.png);
   left: 10px;
 }
 
 .wan-carousel .carousel-direction .carousel-direction-right {
+  background-image: url(img/banner-img.png);
+  background-position: -140px 0px;
   right: 10px;
+}
+
+.wan-carousel .carousel-anchor {
+  bottom: 10px;
+  height: 15px;
+  position: absolute;
+  text-align: center;
+  width: 100%;
+}
+
+.wan-carousel .carousel-anchor > a {
+  background-color: white;
+  border-radius: 10px;
+  display: inline-block;
+  height: 10px;
+  margin: auto 3px;
+  width: 10px;
 }
 
 .wan-carousel .carousel-list {

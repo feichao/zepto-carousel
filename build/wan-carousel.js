@@ -33,44 +33,32 @@
   WanCarousel.prototype.initDom = function() {
     if (this.imgCount > 0) {
       var imgSrc = this.imgInfo[0].src;
-      var content = ['<div class="carousel-content">',
-        '<a>',
-        '<img class="item-left" src="' + imgSrc + '" alt="img">',
-        '<img class="item-middle" src="' + imgSrc + '" alt="img">',
-        '<img class="item-right" src="' + imgSrc + '" alt="img">',
-        '</a>',
+      var content = [
+        '<div class="carousel-content">',
+        '  <a>',
+        '    <img class="item-left" src="' + imgSrc + '" alt="img">',
+        '    <img class="item-middle" src="' + imgSrc + '" alt="img">',
+        '    <img class="item-right" src="' + imgSrc + '" alt="img">',
+        '  </a>',
         '</div>'
       ].join('');
 
-      var direction;
-      if (hasSVG) {
-        direction = ['<div class="carousel-direction hidden">',
-          '<a href="javascript:void(0)" class="carousel-direction-left">',
-          '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="48" height="48">',
-          '<path d="M15.41 16.09l-4.58-4.59 4.58-4.59L14 5.5l-6 6 6 6z"></path>',
-          '</svg>',
-          '</a>',
-          '<a href="javascript:void(0)" class="carousel-direction-right">',
-          '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="48" height="48">',
-          '<path d="M8.59 16.34l4.58-4.59-4.58-4.59L10 5.75l6 6-6 6z"></path>',
-          '</svg>',
-          '</a>',
-          '</div>'
-        ].join('');
-      } else {
-        direction = ['<div class="carousel-direction hidden">',
-          '<a href="javascript:void(0)" class="carousel-direction-left">',
-          '<span>&lt;</span>',
-          '</a>',
-          '<a href="javascript:void(0)" class="carousel-direction-right">',
-          '<span>&gt;</span>',
-          '</a>',
-          '</div>'
-        ].join('');
-      }
+      var direction = [
+        '<div class="carousel-direction hidden">',
+        '  <a href="javascript:void(0)" class="carousel-direction-left"></a>',
+        '  <a href="javascript:void(0)" class="carousel-direction-right"></a>',
+        '</div>'
+      ].join('');
 
-        this.element.append(content);
+      var anchor = '';
+      for(var i=0; i<this.imgCount; i++){
+        anchor += '<a href="javascript:void(0)" data-index="' + i + '"></a>';
+      }
+      anchor = '<div class="carousel-anchor">' + anchor + '</div>';
+
+      this.element.append(content);
       this.element.append(direction);
+      this.element.append(anchor);
       return true;
     }
     return false;
@@ -100,14 +88,21 @@
         self.start('next');
         self.canDo = false;
       }
-    });
+    }).delegate('.carousel-anchor > a', 'click', function(event) {
+      var index;
+      if (self.canDo) {
+        index = $(this).data('index');
+        self.goTo(index);
+        self.canDo = false;
+      }
+    });;
 
+    self.setAnchor();
   };
 
   //开始运行
   WanCarousel.prototype.start = function(direction) {
     var self = this;
-
     self.carouselIntervalTimeout && clearInterval(self.carouselIntervalTimeout);
     direction && self.carouselShow(direction);
     self.carouselIntervalTimeout = setInterval(function() {
@@ -120,26 +115,48 @@
     this.imgContentMiddle.attr('src', imgTemp.src).parent().attr('href', imgTemp.href);
     this.imgContent.css({
       'right': '33.333333%'
-    });
+    }); 
     this.canDo = true;
   };
 
-  WanCarousel.prototype.carouselShow = function(direction) {
+  WanCarousel.prototype.goTo = function(index) {
+    var self = this;
+    var differ = self.currentIndex - index;
+    var direction;
+    
+    if(differ > 0) {
+      direction = 'pre';
+    } else if (differ < 0) {
+      direction = 'next';
+    } else {
+      return;
+    }
+
+    self.carouselIntervalTimeout && clearInterval(self.carouselIntervalTimeout);
+    self.carouselShow(direction, index);
+    self.carouselIntervalTimeout = setInterval(function() {
+      self.carouselShow();
+    }, self.options.interval);
+  };
+
+  WanCarousel.prototype.carouselShow = function(direction, index) {
     var self = this;
     var imgInfo = undefined;
     var dirTemp = undefined;
 
     if (direction === 'pre') {
-      self.currentIndex = (self.currentIndex + self.imgCount - 1) % self.imgCount;
+      self.currentIndex = index >= 0 ? index : (self.currentIndex + self.imgCount - 1) % self.imgCount;
       dirTemp = '0.000000%'; //bug in IE8, '0' is not good
       imgInfo = self.imgInfo[self.currentIndex];
       self.imgContentLeft.attr('src', imgInfo.src).parent().attr('href', imgInfo.href);
     } else {
-      self.currentIndex = (self.currentIndex + 1) % self.imgCount;
+      self.currentIndex = index >= 0 ? index : (self.currentIndex + 1) % self.imgCount;
       dirTemp = '66.666666%';
       imgInfo = self.imgInfo[self.currentIndex];
       self.imgContentRight.attr('src', imgInfo.src).parent().attr('href', imgInfo.href);
     }
+
+    self.setAnchor();
 
     self.imgContent.animate({
       'right': dirTemp
@@ -147,6 +164,15 @@
       self.finish();
     });
   };
+
+  WanCarousel.prototype.setAnchor = function() {
+    $('.carousel-anchor > a').css({
+      'background-color': 'white'
+    });
+    $('.carousel-anchor > a[data-index="' + this.currentIndex + '"]').css({
+       'background-color': 'black'
+    });
+  }
 
   $.fn.WanCarousel = function(options) {
     this.each(function(index, element) {
