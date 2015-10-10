@@ -2,10 +2,25 @@
 (function($, window, document, undefined) {
   'use strict';
 
-  var hasSVG = (function() {
-    var SVG_NS = 'http://www.w3.org/2000/svg';
-    return !!document.createElementNS &&
-      !!document.createElementNS(SVG_NS, 'svg').createSVGRect;
+  var transitionEnd = (function() {
+    var el = document.createElement('div');
+
+    var transEndEventNames = {
+      WebkitTransition: 'webkitTransitionEnd',
+      MozTransition: 'transitionend',
+      OTransition: 'oTransitionEnd otransitionend',
+      transition: 'transitionend'
+    };
+
+    for (var name in transEndEventNames) {
+      if (el.style[name] !== undefined) {
+        return {
+          end: transEndEventNames[name]
+        };
+      }
+    }
+
+    return false;
   })();
 
   var WanCarousel = function(element, options) {
@@ -51,7 +66,7 @@
       ].join('');
 
       var anchor = '';
-      for(var i=0; i<this.imgCount; i++){
+      for (var i = 0; i < this.imgCount; i++) {
         anchor += '<a href="javascript:void(0)" data-index="' + i + '"></a>';
       }
       anchor = '<div class="carousel-anchor">' + anchor + '</div>';
@@ -68,6 +83,7 @@
   WanCarousel.prototype.bind = function() {
     var self = this;
 
+    self.myContent = self.element.find('.carousel-content');
     self.imgContent = self.element.find('.carousel-content img');
     self.imgContentLeft = self.element.find('.carousel-content .item-left');
     self.imgContentMiddle = self.element.find('.carousel-content .item-middle');
@@ -96,7 +112,11 @@
         self.goTo(index);
         self.canDo = false;
       }
-    });;
+    });
+
+    if (transitionEnd) {
+      self.myContent.on(transitionEnd.end, $.proxy(self.finish, self));
+    }
 
     self.setAnchor();
   };
@@ -114,9 +134,20 @@
   WanCarousel.prototype.finish = function() {
     var imgTemp = this.imgInfo[this.currentIndex];
     this.imgContentMiddle.attr('src', imgTemp.src).parent().attr('href', imgTemp.href);
-    this.imgContent.css({
-      'right': '33.333333%'
-    }); 
+    if (transitionEnd) {
+      this.myContent.css({
+        'transition-duration': '0ms',
+        '-moz-transition-duration': '0ms',
+        '-webkit-transition-duration': '0ms',
+        '-o-transition-duration': '0ms',
+        '-ms-transition-duration': '0ms'
+      }).removeClass('left right');
+    } else {
+      this.imgContent.css({
+        'right': '33.333333%'
+      });
+    }
+
     this.canDo = true;
   };
 
@@ -124,8 +155,8 @@
     var self = this;
     var differ = self.currentIndex - index;
     var direction;
-    
-    if(differ > 0) {
+
+    if (differ > 0) {
       direction = 'pre';
     } else if (differ < 0) {
       direction = 'next';
@@ -144,26 +175,40 @@
     var self = this;
     var imgInfo = undefined;
     var dirTemp = undefined;
+    var animation = undefined;
 
     if (direction === 'pre') {
       self.currentIndex = index >= 0 ? index : (self.currentIndex + self.imgCount - 1) % self.imgCount;
       dirTemp = '0.000000%'; //bug in IE8, '0' is not good
+      animation = 'left';
       imgInfo = self.imgInfo[self.currentIndex];
       self.imgContentLeft.attr('src', imgInfo.src).parent().attr('href', imgInfo.href);
     } else {
       self.currentIndex = index >= 0 ? index : (self.currentIndex + 1) % self.imgCount;
       dirTemp = '66.666666%';
+      animation = 'right';
       imgInfo = self.imgInfo[self.currentIndex];
       self.imgContentRight.attr('src', imgInfo.src).parent().attr('href', imgInfo.href);
     }
 
     self.setAnchor();
 
-    self.imgContent.animate({
-      'right': dirTemp
-    }, self.options.speed, 'swing', function() {
-      self.finish();
-    });
+    if (transitionEnd) {
+      var speed = self.options.speed + 'ms';
+      self.myContent.css({
+        'transition-duration': speed,
+        '-moz-transition-duration': speed,
+        '-webkit-transition-duration': speed,
+        '-o-transition-duration': speed,
+        '-ms-transition-duration': speed
+      }).addClass(animation);
+    } else {
+      self.imgContent.animate({
+        'right': dirTemp
+      }, self.options.speed, 'swing', function() {
+        self.finish();
+      });
+    }
   };
 
   WanCarousel.prototype.setAnchor = function() {
@@ -171,7 +216,7 @@
       'background-color': 'white'
     });
     $(this.anchor[this.currentIndex]).css({
-       'background-color': 'black'
+      'background-color': 'black'
     });
   }
 

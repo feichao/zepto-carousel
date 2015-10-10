@@ -7,10 +7,37 @@
 }
 
 .wan-carousel .carousel-content {
+  transition-property: all;
+  -moz-transition-property: all;
+  -webkit-transition-property: all;
+  -o-transition-property: all;
+  -ms-transition-property: all;
+  transition-timing-function: linear;
+  -moz-transition-timing-function: linear;
+  -webkit-transition-timing-function: linear;
+  -o-transition-timing-function: linear;
+  -ms-transition-timing-function: linear;
   width: 300%;
 }
 
+.wan-carousel .carousel-content.left {
+  -webkit-transform: translateX(33.3333%);
+  -moz-transform: translateX(33.3333%);
+  -ms-transform: translateX(33.3333%);
+  -o-transform: translateX(33.3333%);
+  transform: translateX(33.3333%);
+}
+
+.wan-carousel .carousel-content.right {
+  -webkit-transform: translateX(-33.3333%);
+  -moz-transform: translateX(-33.3333%);
+  -ms-transform: translateX(-33.3333%);
+  -o-transform: translateX(-33.3333%);
+  transform: translateX(-33.3333%);
+}
+
 .wan-carousel .carousel-content img {
+  border-style: none;
   float: left;
   height: 100%;
   position: relative;
@@ -27,6 +54,7 @@
   cursor: pointer;
   height: 150px;
   margin-top: -75px;
+  outline: none;
   position: absolute;
   text-decoration: none;
   text-indent: -10000px;
