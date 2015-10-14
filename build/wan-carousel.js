@@ -114,10 +114,6 @@
       }
     });
 
-    if (transitionEnd) {
-      self.myContent.on(transitionEnd.end, $.proxy(self.finish, self));
-    }
-
     self.setAnchor();
   };
 
@@ -202,6 +198,11 @@
         '-o-transition-duration': speed,
         '-ms-transition-duration': speed
       }).addClass(animation);
+
+      setTimeout(function(){
+        $.proxy(self.finish, self)();
+      }, self.options.speed);
+
     } else {
       self.imgContent.animate({
         'right': dirTemp
