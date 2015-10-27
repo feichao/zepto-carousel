@@ -44,10 +44,15 @@
   <script type="text/javascript" src="js/jquery-1.11.3.js"></script>
   <script type="text/javascript" src="../build/wan-carousel.js"></script>
   <script>
-  $(".wan-carousel-1, .wan-carousel-2").WanCarousel();
+  $(".wan-carousel-1, .wan-carousel-2").WanCarousel({
+    callback: function(element, index){
+      console.log(element);
+      console.log(index);
+    }
+  });
   $(".wan-carousel-3").WanCarousel({
     interval: 8000,
-    speed: 400,
+    speed: 400
   });
   $(".wan-carousel-4").WanCarousel({
     interval: 2000,

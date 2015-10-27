@@ -27,6 +27,9 @@
     this.defaults = {
       interval: 6000,
       speed: 500,
+      callback: function(element, index){
+        return;
+      }
     };
     this.options = $.extend({}, this.defaults, options);
     this.canDo = true;
@@ -143,7 +146,7 @@
         'right': '33.333333%'
       });
     }
-
+    this.options.callback(this.imgList.eq(this.currentIndex), this.currentIndex);
     this.canDo = true;
   };
 
