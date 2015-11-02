@@ -38,3 +38,5 @@ If you want goto some pages when user click the image, you can wrap the image wi
 >interval: millisecond.
 >
 >speed: millisecond.
+>
+>callback: function when animation end.

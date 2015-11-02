@@ -20,7 +20,7 @@
   width: 300%;
 }
 
-.wan-carousel .carousel-content.left {
+.wan-carousel .carousel-content.cs-left {
   -webkit-transform: translateX(33.3333%);
   -moz-transform: translateX(33.3333%);
   -ms-transform: translateX(33.3333%);
@@ -28,7 +28,7 @@
   transform: translateX(33.3333%);
 }
 
-.wan-carousel .carousel-content.right {
+.wan-carousel .carousel-content.cs-right {
   -webkit-transform: translateX(-33.3333%);
   -moz-transform: translateX(-33.3333%);
   -ms-transform: translateX(-33.3333%);

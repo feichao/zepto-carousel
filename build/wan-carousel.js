@@ -140,7 +140,7 @@
         '-webkit-transition-duration': '0ms',
         '-o-transition-duration': '0ms',
         '-ms-transition-duration': '0ms'
-      }).removeClass('left right');
+      }).removeClass('cs-left cs-right');
     } else {
       this.imgContent.css({
         'right': '33.333333%'
@@ -179,13 +179,13 @@
     if (direction === 'pre') {
       self.currentIndex = index >= 0 ? index : (self.currentIndex + self.imgCount - 1) % self.imgCount;
       dirTemp = '0.000000%'; //bug in IE8, '0' is not good
-      animation = 'left';
+      animation = 'cs-left';
       imgInfo = self.imgInfo[self.currentIndex];
       self.imgContentLeft.attr('src', imgInfo.src).parent().attr('href', imgInfo.href);
     } else {
       self.currentIndex = index >= 0 ? index : (self.currentIndex + 1) % self.imgCount;
       dirTemp = '66.666666%';
-      animation = 'right';
+      animation = 'cs-right';
       imgInfo = self.imgInfo[self.currentIndex];
       self.imgContentRight.attr('src', imgInfo.src).parent().attr('href', imgInfo.href);
     }
