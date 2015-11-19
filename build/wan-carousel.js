@@ -53,7 +53,7 @@
       var imgSrc = this.imgInfo[0].src;
       var content = [
         '<div class="carousel-content">',
-        '  <a>',
+        '  <a href="' + this.imgInfo[0].href + '">',
         '    <img class="item-left" src="' + imgSrc + '" alt="img">',
         '    <img class="item-middle" src="' + imgSrc + '" alt="img">',
         '    <img class="item-right" src="' + imgSrc + '" alt="img">',
