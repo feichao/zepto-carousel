@@ -3,14 +3,18 @@
 标签：zepto carousel 
 
 ---
+ 
  - **DEMO**
 >demo/index.html
 
  - **准备使用**
 
 >-include zepto
+>
 >-include bulid/zepto-carousel.css 
+>
 >-include build/zepto-carousel.js
+>
 
 HTML中添加下述代码，carousel-list是图片所在列表，carousel-anchor是图片底部的锚点。
 
