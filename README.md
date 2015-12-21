@@ -8,7 +8,6 @@
 >demo/index.html
 
  - **准备使用**
-
 >-include zepto
 >
 >-include bulid/zepto-carousel.css 
