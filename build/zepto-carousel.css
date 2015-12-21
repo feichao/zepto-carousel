@@ -1,0 +1,54 @@
+/*********** carousel start *************/
+
+.zepto-carousel {
+  overflow: hidden;
+  position: relative;
+  width: 100%;
+}
+
+.zepto-carousel > .carousel-list {
+  overflow: hidden;
+  transition-property: all;
+  -webkit-transition-property: all;
+}
+
+.zepto-carousel > .carousel-list > a {
+  display: block;
+  float: left;
+}
+
+.zepto-carousel > .carousel-list > a > img {
+  width: 100%;
+}
+
+.zepto-carousel .carousel-content {
+  transition-property: all;
+  -webkit-transition-property: all;
+  transition-timing-function: ease;
+  -webkit-transition-timing-function: ease;
+}
+
+.zepto-carousel .carousel-anchor {
+  bottom: 10px;
+  height: 15px;
+  position: absolute;
+  text-align: center;
+  width: 100%;
+}
+
+.zepto-carousel .carousel-anchor > span {
+  background-color: black;
+  border-radius: 50%;
+  box-shadow: 1px 1px 3px rgba(0,0,0,0.5);
+  display: inline-block;
+  height: 10px;
+  margin: auto 3px;
+  width: 10px;
+}
+
+.zepto-carousel .carousel-anchor > span.active {
+  background-color: white;
+}
+
+
+/*********** carousel end *************/

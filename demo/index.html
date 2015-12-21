@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>demo zepto-carousel</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" type="text/css" href="../build/zepto-carousel.css">
+</head>
+
+<body>
+  <div class="zepto-carousel" style="width: 100%;">
+    <div class="carousel-list">
+      <a href="#">
+        <img src="img/1.jpg" alt="img">
+      </a>
+      <a href="#">
+        <img src="img/2.jpg" alt="img">
+      </a>
+      <a href="#">
+        <img src="img/3.jpg" alt="img">
+      </a>
+      <a href="#">
+        <img src="img/4.jpg" alt="img">
+      </a>
+    </div>
+    <div class="carousel-anchor">
+      <span></span>
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
+  </div>
+  <script type="text/javascript" src="../demo/js/zepto.js"></script>
+  <script type="text/javascript" src="../build/zepto-carousel.js"></script>
+  <script>
+  $(".zepto-carousel").ZeptoCarousel({
+    interval: 6000,
+    callback: function(element, index){
+
+    }
+  });
+  </script>
+</body>
+
+</html>
